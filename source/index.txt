@@ -1,0 +1,353 @@
+======================================
+Documentation is Code is Documentation
+======================================
+
+*Writing Documentation for and with Developers*
+
+:author: Sam Kleinman
+:company: 10gen, Inc. 
+:project: MongoDB
+:link: http://tychoish.net/oh-2012/
+
+.. notslides:: 
+   
+   This page contains the full source of the presentation as well as
+   some additional polished version of my speakers notes. You can also
+   view the `slides`_ for the presentation.
+
+   .. _`slides`: /oh-2012/slides
+
+Preamble
+--------
+
+.. notslides::
+
+   **Documentation is Code is Documentation: Writing Documentation for
+   and with Developers**
+
+   The MongoDB documentation is unique in that its users are almost
+   exclusively developers or systems administrators. Until I joined
+   the team last year, most contributors to the documentation were
+   MongoDB developers themselves. While the revision process for the
+   MongoDB documentation is significant and ongoing, the audience
+   hasn’t changed and finding the best way to engage and serve the
+   needs of developers and administrators remains central to our
+   documentation process. Additionally, as a component of an open
+   source project, the MongoDB documentation project aims to operate
+   as an open source project itself.
+
+   This talk explores the challenges and strategies of two related
+   concepts: writing documentation for developers and writing document
+   with developers. The presentation will discuss the tools,
+   processes, and organizational tactics that we’ve used to develop
+   documentation.
+
+Documentation Engineering
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Documentation Triad
++++++++++++++++++++
+
+- How it works.
+  
+- How to use it.
+  
+- What's possible.
+
+Documentation at 10gen
+++++++++++++++++++++++
+
+- Kernel Team
+
+- Driver Team
+
+- Integration Team
+
+... and more.
+
+.. notslides:: 
+   
+   **Notes:**
+
+   The documentation team at 10gen works on a number of projects in
+   addition to the core MongoDB documentation and supports teams
+   working on education, professional services, cloud services, and
+   user/community support. 
+
+MongoDB Documentation Circa September 2011
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Legacy Documentation
+++++++++++++++++++++
+
+... and a lot of it.
+
+.. notslides:: 
+
+   **Notes:**
+
+   The existing documentation for MongoDB is at
+   http://www.mongodb.org/display/DOCS/Home/, while driver and
+   integration documentation is (mostly,) hosted on
+   http://api.mongodb.org/, with some exceptions. There is/was also
+   http://cookbook.mongodb.org/, and I might be missing one or two
+   other sources for information about MongoDB.
+
+   No one in at 10gen or working on MongoDB had been able to dedicate
+   significant time to documentation, beyond simple reactive fixes to
+   specific issues. There *was* documentation, 
+
+Limited Processes
++++++++++++++++++
+  
+No *formal* conventions for: 
+
+- Reporting issues.
+
+- Capturing changes.
+
+- Release processes.
+
+- Collaboration.
+ 
+.. notslides:: 
+
+   **Notes:**
+   
+   Certainly, there were informal methods to fulfill these needs: the
+   wiki provided a collaboration substrate. Developers were admonished
+   to update the documentation when their changes affected
+   users. There were comments on each wiki page powered by Disqus. But
+   there's no way to triage issues, no way to effectively respond to
+   these kinds of comments at scale, and there's no really good way to
+   make, review, and publish "batches" of updates to (most) wikis.
+
+Unsustainable
++++++++++++++
+
+.. notslides:: 
+   
+   **Notes:**
+
+   In short the documentation was unsustainable and confusing for the
+   maintainers and developers. There was no way to check if
+   documentation was up to-date, and no good way of notating which
+   features existed in which versions. To make a bad situation worse,
+   because there was so much legacy documentation with lots of
+   duplication, it wasn't always easy to tell if the updates you made
+   were the only updates required.
+
+   If users weren't confused, it was only because they hadn't stumbled
+   along enough.  
+
+Maintenance and Collaboration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+How do we: 
+
+- keep the docs up to date and relevant?
+
+- do docs well for the  project and organization? 
+  
+- make docs great for developers and administrators?
+
+Evolving Needs
+~~~~~~~~~~~~~~
+
+MongoDB Grows
++++++++++++++
+  
+- New users every day.
+  
+- New features every day.
+
+Usage and Abusage
++++++++++++++++++
+
+- Documentation must address user support.
+  
+- Limited body of existing patterns and procedures.
+
+Solutions
+---------
+
+Tooling Matters
+~~~~~~~~~~~~~~~
+
+General
++++++++
+
+- Reproduceable offline builds. 
+- Accessible for editing and contribution.
+- No  "expensive" tasks that can't be automated.
+
+Other Requirements
+++++++++++++++++++
+
+- "Edit this Page" button.
+  
+- Branched versioning. 
+
+Process Matters More
+~~~~~~~~~~~~~~~~~~~~
+
+- Bug/Issue tracking (i.e. project management and distributed review.)
+
+- Code review (i.e. editing.)
+
+- Refactoring (i.e. consistency editing.)
+
+- Collaboration (i.e. version control/``git``.)
+
+- Publication System (i.e. build automation/``make``.)
+
+Diffusion of Responsibility
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Universal Access and Wikis.
+ 
+     If anyone can edit the docs, *anyone* (else) should make this change.
+
+- Owners/Lieutenants/Stewards.
+
+     Style, organization and content.
+
+State of the Art
+----------------
+
+.. notslides:: 
+   
+   This section addresses what we've done in the last year to make
+   documentation better at MongoDB. 
+
+Tools
+~~~~~
+
+.. notslides:: 
+   
+   Our toolchain now consists of the following components:
+
+- Sphinx.
+- Git.
+- Make.
+- Rsync.
+
+.. notslides:: 
+   
+   That's it.'and that's it. You can see how all of the pieces fit together in
+   the `github repository`_. Pay particular attention to the
+   `makefile`_ and `conf.py`_ files. 
+      
+   .. _`github repository`: http://githib.com/mongodb/docs/
+   .. _`makefile`: https://github.com/mongodb/docs/blob/master/makefile
+   .. _`conf.py`: https://github.com/mongodb/docs/blob/master/conf.py
+
+Process
+~~~~~~~
+
+- Using ``git`` and github to manage collaboration.
+  
+- Use the issue management system for tracking documentation.   
+
+- "*Documentation change needed?*" fields on issues.
+  
+- "Lurk everything."
+  
+.. notslides:: 
+   
+   **Notes:**
+
+   There are 4 aspects of the process changes that I think are
+   fundamental to doing documentation right for this kind of project: 
+   
+   #. Use tools and conventions that are familiar to developers.
+
+   #. From a project management perspective, approach software and
+      documentation in the same way. Modulo automated-testing
+      possibilities.
+
+   #. Use data that the project already collects: commits to the core
+      software repository and the core issue reports/items. MongoDB
+      now has "documentation change needed," fields that developers
+      must select when closing a ticket. Similar processes are in
+      place for support requests, to make sure that all relevant
+      changes filter into the documentation.
+      
+   #. Technical writers on the MongoDB product are involved in the
+      support process, and sit in on a large number of conversations
+      about the evolution of the product, to prevent the documentation
+      from drifting from the software.
+
+Open Questions
+~~~~~~~~~~~~~~
+
+- Is information singularity viable?
+
+- Information architecture.
+
+- Is the barrier to contribution still too high?
+
+- Translation
+
+.. notslides:: 
+
+   **Notes:**
+
+   On the one hand, the conventional (and I think correct,) wisdom
+   is that you effectively  shoot yourself in the foot by having
+   providing multiple "repositories of information" on a single
+   topic. On the other, it can be just as confusing to interpose
+   information targeted at different kinds of users in a single
+   resource.
+
+   This fundamental quandary regarding singularity challenges every
+   information architecture decision and choice. Clearly "less is
+   more" here, but there's also a point where it's not viable to keep
+   everything in one bucket. I'd assert that a user's ability to
+   contribute to documentation is at least partially dependent upon
+   their ability to understand the organization of the documentation.
+
+   And then there's translation, which remains an open question.
+
+Postamble
+---------
+
+Related Reading
+~~~~~~~~~~~~~~~
+
+MongoDB
++++++++
+
+- The Manual: http://docs.mongodb.org/manual/
+- GitHub: http://githib.com/mongodb/docs/
+- Tracker: http://jira.mongodb.com/browse/DOCS/
+
+Personal
+++++++++
+
+- Blog/wiki: http://tychoish.com/
+- Projects: http://cyborginstitute.org/
+- Twitter: `@tychoish <http://twitter.com/tychoish>`_
+- GiHub: `tychoish <http://github.com/tychoish>`_
+
+Credits
+~~~~~~~
+
+- 10gen, Inc./MongoDB
+- The `Buildbot`_, and `GNU MediaGoblin`_ projects.
+- Nathan Yergler for `Hieroglyph`_.
+
+.. _`Buildbot`: http://buildbot.net/buildbot/docs/current/index.html
+.. _`GNU MediaGoblin`: http://docs.mediagoblin.org/
+.. _`Hieroglyph`: https://github.com/nyergler/hieroglyph
+
+Open Discussion
+~~~~~~~~~~~~~~~
+
+- The foibles of Sphinx.
+
+- MongoDB.
+
+- The limitations of information source singularity.
+
+- Community and User Support at 10gen.
